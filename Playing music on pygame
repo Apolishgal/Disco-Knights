@@ -1,0 +1,14 @@
+#playing music on pygame
+pygame.init()
+pygame.mixer.init()
+screen = pygame.display.set_mode([640,480])
+pygame.time.delay(1000)
+pygame.mixer.music.load('filename')
+pygame.mixer.music.play()
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+pygame.quit()
+#Trouble: does not paly on qtdesigner. Have to connect pygame and PyQt
