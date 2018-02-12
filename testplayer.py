@@ -3,7 +3,7 @@ from PyQt4.phonon import Phonon
 
 class Window(QtGui.QPushButton):
     def __init__(self):
-        QtGui.QPushButton.__init__(self, 'thanks.mp3')
+        QtGui.QPushButton.__init__(self, 'Choose a File')
         self.mediaObject = Phonon.MediaObject(self)
         self.audioOutput = Phonon.AudioOutput(Phonon.MusicCategory, self)
         Phonon.createPath(self.mediaObject, self.audioOutput)
@@ -23,7 +23,7 @@ class Window(QtGui.QPushButton):
         if newstate == Phonon.PlayingState:
             self.setText('Stop')
         elif newstate == Phonon.StoppedState:
-            self.setText('thanks.mp3')
+            self.setText('Choose a File')
         elif newstate == Phonon.ErrorState:
             source = self.mediaObject.currentSource().fileName()
             print 'ERROR: could not play:', source.toLocal8Bit().data()
