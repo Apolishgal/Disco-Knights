@@ -102,44 +102,76 @@ import pygame
 import time
 import random
 
-#playing music on pygame
-#pygame.init()
-#pygame.mixer.init()
-#screen = pygame.display.set_mode([640,480])
-#pygame.time.delay(1000)
-#pygame.mixer.music.load('Sistar - I Like That.mp3')
-#pygame.mixer.music.play()
 form_class = uic.loadUiType("radio.ui")[0]
 
 class MyWindowClass(QtGui.QMainWindow, form_class):
     def __init__(self, parent = None):
         QtGui.QMainWindow.__init__(self,parent)
         self.setupUi(self)
-        self.pushButton.clicked.connect(self.button_clicked)
-
-    def button_clicked(self):
-        if(self.pushButton.text () == "Play"):
-            self.pushButton.setText("Pause") 
-        else:
-            self.pushButton.setText("Play")
-        print("Testing...")
-        print("It looks like its working")
-
-        pygame.mixer.init()
-        pygame.display.init()
-        playlist = list()
-        playlist.append ( 'Sistar - I Like That.mp3' )
-        playlist.append ( 'Michael Jackson - Smooth Criminal Lyrics.mp3' )
-        playlist.append ( "SUPER JUNIOR 슈퍼주니어 'Black Suit' MV.mp3" )
-        pygame.mixer.music.load ( playlist.pop() )
-        pygame.mixer.music.play()
-        running = True
-        while running:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    running = False
-                    
-        
+        self.Play.clicked.connect(self.button_clicked)
+        self.Song1.clicked.connect(self.button_clicked3)
+        self.Skip.clicked.connect(self.button_clicked6)
+        self.Shuffle.clicked.connect(self.button_clicked7)
+    def button_clicked(self, parent = None):
+        if(self.Name.text () == "Choose Song from Playlist"):
+            self.Name.setText("Song1")
+            pygame.mixer.init()
+            pygame.mixer.music.load('Sistar - I Like That.mp3')
+            pygame.mixer.music.play()
+        elif(self.Name.text () == "Song2"):
+            pygame.mixer.init()
+            pygame.mixer.music.load('Michael Jackson - Smooth Criminal Lyrics.mp3')
+            pygame.mixer.music.play()
+        elif(self.Name.text () == "Song3"):
+            pygame.mixer.init()
+            pygame.mixer.music.load("SUPER JUNIOR 슈퍼주니어 'Black Suit' MV.mp3")
+            pygame.mixer.music.play()
+    def button_clicked2(self, parent = None):
+        pygame.mixer.music.pause()
+    def button_clicked3(self):
+        self.Name.setText("Song1")
+    def button_clicked4(self):
+        self.Name.setText("Song2")
+    def button_clicked5(self):
+        self.Name.setText("Song3")
+    def button_clicked6(self, parent = None):
+        if(self.Name.text () == "Song1"):
+            self.Name.setText("Song2")
+            pygame.mixer.music.load('Michael Jackson - Smooth Criminal Lyrics.mp3')
+            pygame.mixer.music.play()
+        elif(self.Name.text () == "Song2"):
+            self.Name.setText("Song3")
+            pygame.mixer.music.load("SUPER JUNIOR 슈퍼주니어 'Black Suit' MV.mp3")
+            pygame.mixer.music.play()
+            
+    def button_clicked7(self):
+        songshuffle1 = ['Song2', 'Song3']
+        songshuffle2 = ['Song1', 'Song3']
+        songshuffle3 = ['Song1', 'Song2']
+        if(self.Name.text () == "Song1"):
+            self.Name.setText(random.choice(songshuffle1))
+            if(self.Name.text () == "Song2"):
+                pygame.mixer.music.load('Michael Jackson - Smooth Criminal Lyrics.mp3')
+                pygame.mixer.music.play()
+            elif(self.Name.text () == "Song3"):
+                pygame.mixer.music.load("SUPER JUNIOR 슈퍼주니어 'Black Suit' MV.mp3")
+                pygame.mixer.music.play()
+        elif(self.Name.text () == "Song2"):
+            self.Name.setText(random.choice(songshuffle2))
+            if(self.Name.text () == "Song1"):
+                pygame.mixer.music.load('Sistar - I Like That.mp3')
+                pygame.mixer.music.play()
+            elif(self.Name.text () == "Song3"):
+                pygame.mixer.music.load("SUPER JUNIOR 슈퍼주니어 'Black Suit' MV.mp3")
+                pygame.mixer.music.play()
+        elif(self.Name.text () == "Song3"):
+            self.Name.setText(random.choice(songshuffle3))
+            if(self.Name.text () == "Song1"):
+                pygame.mixer.music.load('Sistar - I Like That.mp3')
+                pygame.mixer.music.play()
+            elif(self.Name.text () == "Song2"):
+                pygame.mixer.music.load('Michael Jackson - Smooth Criminal Lyrics.mp3')
+                pygame.mixer.music.play()
 pygame.quit()
 app = QtGui.QApplication(sys.argv)
 myWindow = MyWindowClass(None)
