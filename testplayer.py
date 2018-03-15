@@ -87,4 +87,62 @@ app = QtGui.QApplication(sys.argv)
 myWindow = MyWindowClass(None)
 myWindow.show()
 app.exec_()
+
+
+
+
+
+
+
+#pygame mix
+import sys
+from PyQt4 import QtCore, QtGui, uic
+import easygui
+import pygame
+import time
+import random
+
+#playing music on pygame
+#pygame.init()
+#pygame.mixer.init()
+#screen = pygame.display.set_mode([640,480])
+#pygame.time.delay(1000)
+#pygame.mixer.music.load('Sistar - I Like That.mp3')
+#pygame.mixer.music.play()
+form_class = uic.loadUiType("radio.ui")[0]
+
+class MyWindowClass(QtGui.QMainWindow, form_class):
+    def __init__(self, parent = None):
+        QtGui.QMainWindow.__init__(self,parent)
+        self.setupUi(self)
+        self.pushButton.clicked.connect(self.button_clicked)
+
+    def button_clicked(self):
+        if(self.pushButton.text () == "Play"):
+            self.pushButton.setText("Pause") 
+        else:
+            self.pushButton.setText("Play")
+        print("Testing...")
+        print("It looks like its working")
+
+        pygame.mixer.init()
+        pygame.display.init()
+        playlist = list()
+        playlist.append ( 'Sistar - I Like That.mp3' )
+        playlist.append ( 'Michael Jackson - Smooth Criminal Lyrics.mp3' )
+        playlist.append ( "SUPER JUNIOR 슈퍼주니어 'Black Suit' MV.mp3" )
+        pygame.mixer.music.load ( playlist.pop() )
+        pygame.mixer.music.play()
+        running = True
+        while running:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+                    
+        
+pygame.quit()
+app = QtGui.QApplication(sys.argv)
+myWindow = MyWindowClass(None)
+myWindow.show()
+app.exec_()
         
